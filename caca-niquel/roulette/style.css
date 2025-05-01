@@ -1,0 +1,151 @@
+/* Corpo e fundo da página */
+body {
+    background-color: #2c2c2c;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background-color: #1a1a1a;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  header .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+  }
+  
+  header .logo-text {
+    font-size: 24px;
+    color: #ffce00;
+    font-weight: bold;
+  }
+  
+  /* Container da roleta */
+  .roulette-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    font-family: 'Arial', sans-serif;
+    color: #ffce00;
+  }
+  
+  /* Estilo da roleta */
+  .roulette-wheel {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 10px solid #ffce00;
+    margin: 20px auto;
+    background: linear-gradient(45deg, #e60000, #ff9b00);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 30px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Resultado da roleta */
+  .result {
+    margin-top: 20px;
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Opções de aposta */
+  .betting-options {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .betting-options input,
+  .betting-options select,
+  .betting-options button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ffce00;
+    background-color: #333;
+    color: #ffce00;
+  }
+  
+  .betting-options button {
+    background-color: #ffce00;
+    color: #222;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .betting-options button:hover {
+    background-color: #ff9800;
+  }
+  
+  /* Painel de informações */
+  .info-panel {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .info-panel select {
+    background-color: #333;
+    color: #ffce00;
+    border: 2px solid #ffce00;
+  }
+  
+  footer {
+    background-color: #111;
+    color: #ccc;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .roulette-wheel {
+      width: 300px;
+      height: 300px;
+    }
+  
+    h1 {
+      font-size: 28px;
+    }
+  
+    .betting-options input,
+    .betting-options select,
+    .betting-options button {
+      font-size: 14px;
+    }
+  
+    .info-panel select {
+      font-size: 14px;
+    }
+  }
+  

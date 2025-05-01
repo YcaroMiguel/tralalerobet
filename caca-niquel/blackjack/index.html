@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackjack - TralaleroBet</title>
+  <link rel="stylesheet" href="blackjack-style.css">
+  <script src="blackjack.js" defer></script>
+</head>
+<body>
+  <header>
+    <a href="/caca-niquel/tralalerobet/index.html">
+        <div class="logo-container">
+          <img src="/caca-niquel/images/logo.png" alt="TralaleroBet Logo" class="logo">
+          <h1>TralaleroBet - Blackjack</h1>
+        </div>
+    </a>
+  </header>
+
+  <div class="game-container">
+    <div class="hands">
+      <div class="player-hand">
+        <h2>Sua Mão</h2>
+        <div id="player-cards" class="cards"></div>
+      </div>
+
+      <div class="dealer-hand">
+        <h2>Mão do Dealer</h2>
+        <div id="dealer-cards" class="cards"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="start-button">Iniciar Jogo</button>
+      <button id="hit-button" disabled>Comprar</button>
+      <button id="stand-button" disabled>Parar</button>
+      <p id="game-message"></p>
+    </div>
+    
+    <div class="game-info">
+      <h3>Pontuação:</h3>
+      <p><strong>Você: <span id="player-score">0</span></strong></p>
+      <p><strong>Dealer: <span id="dealer-score">0</span></strong></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 TralaleroBet - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>
