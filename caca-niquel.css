@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    background: radial-gradient(#111, #000);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+  }
+  
+  .slot-machine {
+    text-align: center;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #ffce00;
+  }
+  
+  .reels {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .reel {
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    background: #333;
+    border: 2px solid #ffce00;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .reel img {
+    width: 80px;
+    height: 80px;
+    animation: spin 0.5s ease-in-out;
+  }
+  
+  @keyframes spin {
+    0% { transform: scale(1) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+  }
+  
+  button {
+    background: #ffce00;
+    color: #000;
+    border: none;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  button:hover {
+    background: #ffd500;
+    transform: scale(1.05);
+  }
+  
+  #result {
+    font-size: 20px;
+    margin-top: 15px;
+  }
+
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .logo img {
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 0 5px #ffce00);
+  }
+
+  /* Logo e título no canto superior */
+.top-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    height: 50px;
+    width: auto;
+    filter: drop-shadow(0 0 5px #ffce00);
+  }
+  
+  .logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #ffce00;
+    text-shadow: 0 0 5px black;
+  }
+  
+  /* Slot machine visual */
+  .reels {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .reel {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background: #222;
+    border: 3px solid #ffce00;
+    border-radius: 12px;
+    position: relative;
+  }
+  
+  .reel .spin-container {
+    position: absolute;
+    width: 100%;
+    animation: spin-vertical 0.7s ease-out forwards;
+  }
+  
+  .reel img {
+    width: 100%;
+    height: 100px;
+    display: block;
+  }
+  
+  @keyframes spin-vertical {
+    0% {
+      top: -300px;
+    }
+    100% {
+      top: 0;
+    }
+  }
+  
+  .info-panel {
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .info-panel select {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+  }
+  a{
+    text-decoration: none;
+  }
