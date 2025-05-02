@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Roleta - TralaleroBet</title>
+  <link rel="stylesheet" href="roleta.css">
+</head>
+<body>
+  <header class="header">
+    <a href="/caca-niquel/tralalerobet/index.html">
+        <div class="logo-container">
+          <img src="logo.png" alt="Logo TralaleroBet" class="logo">
+          <span class="logo-text">TralaleroBet</span>
+        </div>
+    </a>
+  </header>
+
+  <main class="roulette-container">
+    <h1>🎡 Roleta</h1>
+
+    <div class="roulette-wheel">
+      <div id="roulette-result" class="result">
+        <p>Gire a roleta!</p>
+      </div>
+    </div>
+
+    <div class="betting-options">
+      <p>Aposte no número ou na cor</p>
+      <label for="betNumber">Número (0-36):</label>
+      <input type="number" id="betNumber" min="0" max="36">
+
+      <label for="betColor">Cor:</label>
+      <select id="betColor">
+        <option value="vermelho">Vermelho</option>
+        <option value="preto">Preto</option>
+      </select>
+
+      <button id="spinButton">Girar</button>
+    </div>
+
+    <div class="info-panel">
+      <p><strong>Moedas:</strong> <span id="coins">1000</span></p>
+      <label for="betAmount">Aposta:</label>
+      <select id="betAmount">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2025 &COPY;TralaleroBet, por Ycaro INC. Todos os direitos reservados.</p>
+    </footer>
+  </main>
+
+  <script src="roleta.js"></script>
+</body>
+</html>
