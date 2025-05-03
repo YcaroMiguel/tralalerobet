@@ -14,7 +14,8 @@
     .multiplicador { font-size: 48px; margin: 20px 0; transition: color 0.2s; }
     .controles input { padding: 8px; width: 80px; }
     .controles button { padding: 8px 16px; margin: 5px; font-size: 16px; cursor: pointer; }
-    .aviao { position: absolute; width: 80px; transition: transform 0.1s linear; }
+    .aviao { position: absolute; width: 80px; transition: transform 0.1s linear; filter: drop-shadow(0 0 5px #0ff); }
+    .rastro { position: absolute; width: 60px; height: 10px; background: linear-gradient(to right, #0ff, transparent); opacity: 0.6; transform: rotate(45deg); border-radius: 5px; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -70,6 +71,7 @@
     let emJogo = false;
     let crashPoint = Math.random() * 5 + 1.5;
     let posicaoY = 0;
+    let posicaoX = 20;
     let aviao = document.getElementById("aviao");
 
     const multDisplay = document.getElementById("multiplicador");
@@ -77,21 +79,35 @@
     const btnApostar = document.getElementById("apostar");
     const btnRetirar = document.getElementById("retirar");
 
+    function criarRastro(x, y) {
+      const rastro = document.createElement("div");
+      rastro.className = "rastro";
+      rastro.style.left = `${x}px`;
+      rastro.style.top = `${y}px`;
+      document.querySelector(".crash-container").appendChild(rastro);
+      setTimeout(() => rastro.remove(), 800);
+    }
+
     function iniciarJogo(aposta) {
       multiplicador = 1.00;
       crashPoint = Math.random() * 5 + 1.5;
       emJogo = true;
       posicaoY = 0;
-      aviao.style.transform = `translateY(0px)`;
+      posicaoX = 20;
+      aviao.style.transform = `translate(${posicaoX}px, ${posicaoY}px)`;
       btnApostar.disabled = true;
       btnRetirar.disabled = false;
+      let velocidade = 2;
 
       intervalo = setInterval(() => {
         multiplicador += 0.05;
-        posicaoY -= 5;
-        aviao.style.transform = `translateY(${posicaoY}px)`;
+        velocidade *= 1.03;
+        posicaoY -= velocidade * 0.8;
+        posicaoX += velocidade * 1.5;
+        aviao.style.transform = `translate(${posicaoX}px, ${posicaoY}px)`;
         multDisplay.textContent = multiplicador.toFixed(2) + "x";
         multDisplay.style.color = "#0f0";
+        criarRastro(posicaoX + 20, posicaoY + 40);
 
         if (multiplicador >= crashPoint) {
           encerrarJogo(false, aposta);
@@ -111,6 +127,17 @@
         adicionarMoedas(ganho);
         alert(`Você ganhou ${ganho} moedas!`);
       } else {
+        const explosao = document.createElement("div");
+        explosao.style.position = "absolute";
+        explosao.style.width = "80px";
+        explosao.style.height = "80px";
+        explosao.style.left = `${posicaoX}px`;
+        explosao.style.top = `${posicaoY}px`;
+        explosao.style.borderRadius = "50%";
+        explosao.style.background = "radial-gradient(circle, red, orange, transparent)";
+        explosao.style.boxShadow = "0 0 30px red";
+        document.querySelector(".crash-container").appendChild(explosao);
+        setTimeout(() => explosao.remove(), 1000);
         alert("O avião caiu! Você perdeu a aposta.");
       }
       saldoDisplay.textContent = getSaldo();
