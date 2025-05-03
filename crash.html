@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crash Game - TralaleroBet</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #fff; text-align: center; overflow-x: hidden; }
+    .topo { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #222; }
+    .logo { height: 50px; }
+    .titulo { font-size: 24px; }
+    .saldo-container { font-size: 18px; }
+    .crash-container { margin-top: 40px; position: relative; height: 400px; overflow: hidden; }
+    .multiplicador { font-size: 48px; margin: 20px 0; transition: color 0.2s; }
+    .controles input { padding: 8px; width: 80px; }
+    .controles button { padding: 8px 16px; margin: 5px; font-size: 16px; cursor: pointer; }
+    .aviao { position: absolute; width: 80px; transition: transform 0.1s linear; }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <img src="logo.png" alt="Logo TralaleroBet" class="logo">
+    <h1 class="titulo">TralaleroBet</h1>
+    <div class="saldo-container">Moedas: <span id="saldo">0</span></div>
+  </header>  <main class="crash-container">
+    <h2>Jogo do Aviãozinho (Crash)</h2>
+    <div class="multiplicador" id="multiplicador">1.00x</div>
+    <img src="aviao.png" id="aviao" class="aviao" style="bottom: 0; left: 20px;" />
+    <div class="controles">
+      <input type="number" id="aposta" placeholder="Aposta" min="1">
+      <button id="apostar">Apostar</button>
+      <button id="retirar" disabled>Retirar</button>
+    </div>
+  </main>  <script>
+    function getSaldo() {
+      return parseInt(localStorage.getItem('saldo')) || 0;
+    }
+
+    function setSaldo(valor) {
+      localStorage.setItem('saldo', valor);
+    }
+
+    function adicionarMoedas(valor) {
+      setSaldo(getSaldo() + valor);
+    }
+
+    function removerMoedas(valor) {
+      const saldoAtual = getSaldo();
+      if (saldoAtual >= valor) {
+        setSaldo(saldoAtual - valor);
+        return true;
+      } else {
+        alert("Você não tem moedas suficientes!");
+        return false;
+      }
+    }
+
+    function recompensaDiaria() {
+      const hoje = new Date().toDateString();
+      const ultimaRecompensa = localStorage.getItem("ultimoLogin");
+      if (ultimaRecompensa !== hoje) {
+        adicionarMoedas(300);
+        localStorage.setItem("ultimoLogin", hoje);
+        alert("Você ganhou 300 moedas por login diário!");
+      }
+    }
+
+    let multiplicador = 1.00;
+    let intervalo;
+    let emJogo = false;
+    let crashPoint = Math.random() * 5 + 1.5;
+    let posicaoY = 0;
+    let aviao = document.getElementById("aviao");
+
+    const multDisplay = document.getElementById("multiplicador");
+    const saldoDisplay = document.getElementById("saldo");
+    const btnApostar = document.getElementById("apostar");
+    const btnRetirar = document.getElementById("retirar");
+
+    function iniciarJogo(aposta) {
+      multiplicador = 1.00;
+      crashPoint = Math.random() * 5 + 1.5;
+      emJogo = true;
+      posicaoY = 0;
+      aviao.style.transform = `translateY(0px)`;
+      btnApostar.disabled = true;
+      btnRetirar.disabled = false;
+
+      intervalo = setInterval(() => {
+        multiplicador += 0.05;
+        posicaoY -= 5;
+        aviao.style.transform = `translateY(${posicaoY}px)`;
+        multDisplay.textContent = multiplicador.toFixed(2) + "x";
+        multDisplay.style.color = "#0f0";
+
+        if (multiplicador >= crashPoint) {
+          encerrarJogo(false, aposta);
+        }
+      }, 100);
+    }
+
+    function encerrarJogo(vitoria, aposta) {
+      clearInterval(intervalo);
+      emJogo = false;
+      btnApostar.disabled = false;
+      btnRetirar.disabled = true;
+      multDisplay.style.color = vitoria ? "#0f0" : "red";
+
+      if (vitoria) {
+        const ganho = Math.floor(aposta * multiplicador);
+        adicionarMoedas(ganho);
+        alert(`Você ganhou ${ganho} moedas!`);
+      } else {
+        alert("O avião caiu! Você perdeu a aposta.");
+      }
+      saldoDisplay.textContent = getSaldo();
+    }
+
+    btnApostar.onclick = () => {
+      const aposta = parseInt(document.getElementById("aposta").value);
+      if (!aposta || aposta <= 0) return alert("Aposta inválida");
+      if (removerMoedas(aposta)) {
+        saldoDisplay.textContent = getSaldo();
+        iniciarJogo(aposta);
+      }
+    };
+
+    btnRetirar.onclick = () => {
+      if (emJogo) {
+        const aposta = parseInt(document.getElementById("aposta").value);
+        encerrarJogo(true, aposta);
+      }
+    };
+
+    window.onload = () => {
+      recompensaDiaria();
+      saldoDisplay.textContent = getSaldo();
+    }
+  </script></body>
+</html>
